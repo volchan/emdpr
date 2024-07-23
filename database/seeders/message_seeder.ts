@@ -74,9 +74,9 @@ export default class extends BaseSeeder {
         const streamDate = new Date(file.split('.')[0])
 
         const stream = streams.find((el) => el.date.getTime() === streamDate.getTime())
-
+        const matchRegexp = new RegExp('(?:^@.* || .*)|(?:^|| .*)', 'g')
         parsedData.map((jsonData) => {
-          if (!jsonData.message.startsWith('||')) return
+          if (!matchRegexp.test(jsonData.message)) return
 
           messagesData.push({
             timestamp: jsonData.timestamp,
