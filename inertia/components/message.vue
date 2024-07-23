@@ -15,7 +15,7 @@ const Container = styled.div`
   li {
     display: flex;
     margin: 1rem 0;
-    
+
     vertical-align: baseline;
   }
 `
@@ -41,7 +41,7 @@ const Author = styled('div', AuthorProps)`
       text-decoration: underline;
     }
   }
-` 
+`
 
 const Message = styled.div``
 </script>
