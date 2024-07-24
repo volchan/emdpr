@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import HomeController from '#controllers/home_controller'
 import { InferPageProps } from '@adonisjs/inertia/types'
 import { styled } from '@vvibe/vue-styled-components'
 import { Link } from '@inertiajs/vue3'
+
+import HomeController from '#controllers/home_controller'
 
 import ContentContainer from '~/components/content_container.vue'
 
@@ -23,7 +24,7 @@ defineProps<{
   <ContentContainer title="Liste des streams Elden Ring">
     <Streams>
       <li v-for="stream in streams" :key="stream.id" class="stream">
-        <Link :href="`/streams/${stream.id}`"
+        <Link :href="`/streams/${stream.id}/messages`"
           >Stream du {{ new Date(stream.date).toLocaleDateString() }}</Link
         >
       </li>

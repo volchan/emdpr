@@ -9,7 +9,7 @@ const Container = styled.div`
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr max-content;
+  grid-template-rows: max-content 1fr 1fr;
   gap: 10px 0px;
   grid-template-areas:
     'title'

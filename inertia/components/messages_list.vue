@@ -1,30 +1,44 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { styled } from '@vvibe/vue-styled-components'
-import { InferPageProps } from '@adonisjs/inertia/types'
+import { defineProps, ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 
-import StreamsController from '#controllers/streams_controller'
+import Stream from '#models/stream'
+import Message from '#models/message'
+import { PaginationMeta } from '#controllers/messages_controller'
+
 import ContentContainer from '~/components/content_container.vue'
-import Message from '~/components/message.vue'
+import MessageItem from '~/components/message_item.vue'
 
-const Messages = styled.ul`
-  padding: 2rem;
+const last = ref(null)
 
-  li {
-    line-height: 1.5rem;
+useIntersectionObserver(last, ([entry]) => {
+  if (entry.isIntersecting) {
+    if (props.paginate.nextPageUrl) {
+      fetch(props.paginate.nextPageUrl, {
+        headers: {
+          'Accept': 'application/json',
+        }
+      }).then(response => response.json()).then(data => {
+        props.messages.push(...data.messages)
+        props.paginate.nextPageUrl = data.paginate.nextPageUrl
+      })
+    }
   }
-`
+})
 
-defineProps<{
-  stream: InferPageProps<StreamsController, 'show'>['stream']
-  messages: InferPageProps<StreamsController, 'show'>['messages']
+const props = defineProps<{
+  stream: Stream
+  messages: Message[]
+  paginate: PaginationMeta
 }>()
 </script>
 
 <template>
   <ContentContainer :title="`Stream du ${new Date(stream.date).toLocaleDateString()}`" with-return-link>
-    <Messages>
-      <Message v-for="message in messages" :key="message.id" :message="message" />
-    </Messages>
+    <ul>
+      <MessageItem v-for="message in messages" :key="message.id" :message="message" :stream_id="stream.twitchId" />
+      <li v-if="!messages">Aucun messages</li>
+      <div ref="last"></div>
+    </ul>
   </ContentContainer>
 </template>

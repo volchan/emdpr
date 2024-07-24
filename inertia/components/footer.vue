@@ -2,6 +2,7 @@
 import { styled } from '@vvibe/vue-styled-components'
 
 const Footer = styled.p`
+  padding-bottom: 1rem;
   text-align: center;
 
   grid-area: footer;

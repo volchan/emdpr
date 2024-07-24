@@ -1,8 +1,7 @@
-// import type { HttpContext } from '@adonisjs/core/http'
+import { HttpContext } from '@adonisjs/core/http'
 
 import Stream from '#models/stream'
-import { HttpContext } from '@adonisjs/core/http'
-import { StreamsCollectionDto } from './streams_controller.js'
+import { StreamsCollectionDto } from '#dtos/stream_dtos'
 
 export default class HomeController {
   async index({ inertia }: HttpContext) {

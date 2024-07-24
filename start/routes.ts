@@ -10,7 +10,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 
 const HomeController = () => import('#controllers/home_controller')
-const StreamsController = () => import('#controllers/streams_controller')
+const MessagesController = () => import('#controllers/messages_controller')
 
 router.get('/', [HomeController, 'index']).use(
   middleware.auth({
@@ -18,7 +18,7 @@ router.get('/', [HomeController, 'index']).use(
   })
 )
 
-router.get('/streams/:id', [StreamsController, 'show']).use(
+router.get('/streams/:id/messages', [MessagesController, 'index']).use(
   middleware.auth({
     guards: ['basicAuth'],
   })
