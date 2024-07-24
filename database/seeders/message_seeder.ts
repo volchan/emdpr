@@ -14,43 +14,59 @@ const streamData = [
   },
   {
     date: new Date('2024-06-24'),
-    twitchId: '2179711073',
+    twitchId: '2180393607',
   },
   {
     date: new Date('2024-06-26'),
-    twitchId: '2179711073',
+    twitchId: '2182258117',
   },
   {
     date: new Date('2024-07-04'),
-    twitchId: '2179711073',
+    twitchId: '2189218512',
   },
   {
     date: new Date('2024-07-07'),
-    twitchId: '2179711073',
+    twitchId: '2191657978',
   },
   {
     date: new Date('2024-07-08'),
-    twitchId: '2179711073',
+    twitchId: '2192465393',
   },
   {
     date: new Date('2024-07-09'),
-    twitchId: '2179711073',
+    twitchId: '2193494493',
   },
   {
     date: new Date('2024-07-10'),
-    twitchId: '2179711073',
+    twitchId: '2194149182',
   },
   {
     date: new Date('2024-07-14'),
-    twitchId: '2179711073',
+    twitchId: '2194976969',
   },
   {
     date: new Date('2024-07-15'),
-    twitchId: '2179711073',
+    twitchId: '2197523249',
   },
   {
     date: new Date('2024-07-16'),
-    twitchId: '2179711073',
+    twitchId: '2198422981',
+  },
+  {
+    date: new Date('2024-07-18'),
+    twitchId: '2199302922',
+  },
+  {
+    date: new Date('2024-07-19'),
+    twitchId: '2201090026',
+  },
+  {
+    date: new Date('2024-07-20'),
+    twitchId: '2202072512',
+  },
+  {
+    date: new Date('2024-07-23'),
+    twitchId: '2205383277',
   },
 ]
 

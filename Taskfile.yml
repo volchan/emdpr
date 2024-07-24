@@ -1,0 +1,8 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  add-stream-file:
+    cmds:
+      - chat_downloader --message_types text_message --output database/seeders/data/{{ (split " " .CLI_ARGS)._0 }}.json https://www.twitch.tv/videos/{{ (split " " .CLI_ARGS)._1 }}
