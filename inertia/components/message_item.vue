@@ -2,7 +2,7 @@
 import { Link } from '@inertiajs/vue3'
 import { styled } from '@vvibe/vue-styled-components';
 
-import Message from '#models/message';
+import Message, { MessageData } from '#models/message';
 
 defineProps<{
   message: Message,
@@ -50,7 +50,12 @@ const Author = styled('div', AuthorProps)`
   }
 `
 
-const Text = styled.div``
+const Text = styled.div`
+
+  img {
+    vertical-align: middle;
+  }
+`
 
 const convertTimeStringToUrl = (timeString: string) => {
   let hours, minutes, seconds;
@@ -68,6 +73,32 @@ const convertTimeStringToUrl = (timeString: string) => {
 
   return `${hours}h${minutes}m${seconds}s`;
 }
+
+const fixEmoteName = (emoteName: string, message: string) => {
+  console.log(emoteName, message);
+
+  if (emoteName == '') {
+    const specialEmotes = [':D', ':p', 'LUL']
+    return specialEmotes.find(emote => message.includes(emote))!;
+  }
+  const words = message.split(' ');
+  return words.find(word => word.includes(emoteName))!;
+}
+
+const replaceEmoteTextWithImage = (emotes: MessageData['emotes'], message: string) => {
+  if (!emotes) return message;
+  let formattedMessage = message;
+  emotes.forEach(emoteData => {
+    const emote = emoteData.images.find(image => image.id.includes('dark'))!;
+    const fixedEmoteName = fixEmoteName(emoteData.name, message);
+
+    console.log(fixedEmoteName, emoteData);
+
+    formattedMessage = message.replaceAll(fixedEmoteName, `<img src="${emote.url}" height="${emote.height}" width="${emote.width}" alt="${emoteData.name}" />`)
+  });
+
+  return formattedMessage;
+}
 </script>
 
 <template>
@@ -81,8 +112,6 @@ const convertTimeStringToUrl = (timeString: string) => {
         <Link :href="`https://twitch.tv/${message.data.author.display_name}`">{{ message.data.author.display_name }}</Link>
       </Author>
     </Header>
-    <Text>
-      {{ message.data.message }}
-    </Text>
+    <Text v-html="replaceEmoteTextWithImage(message.data.emotes, message.data.message)" />
   </Container>
 </template>

@@ -23,6 +23,21 @@ export type MessageData = {
     id: string
     name: string
   }
+  emotes?: [
+    {
+      id: string
+      images: [
+        {
+          height: number
+          id: string
+          url: string
+          width: number
+        },
+      ]
+      locations: string
+      name: string
+    },
+  ]
   message: string
   message_id: string
   message_type: string

@@ -23,6 +23,8 @@ export default class MessagesController {
   async index({ inertia, params: { id }, request }: HttpContext) {
     const stream = await Stream.find(id)
 
+    if (!stream) return inertia.render('errors/not_found')
+
     const page = request.input('page', 1)
     const limit = 50
     const messages = await Message.query()
