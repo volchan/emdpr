@@ -26,7 +26,6 @@ const Content = styled.div`
   border-top: 0;
 
   max-width: 1000px;
-  min-width: 500px;
   @media (max-width: 500px) {
     min-width: 0;
   }

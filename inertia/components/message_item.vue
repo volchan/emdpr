@@ -50,8 +50,8 @@ const Author = styled('div', AuthorProps)`
   }
 `
 
-const Text = styled.div`
-
+const Text = styled.p`
+  margin-top: 0;
   img {
     vertical-align: middle;
   }
