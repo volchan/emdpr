@@ -1,8 +1,21 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 tasks:
-  add-stream-file:
+  update-chat-files:
+    desc: Update chat files
     cmds:
-      - chat_downloader --message_types text_message --output database/seeders/data/{{ (split " " .CLI_ARGS)._0 }}.json https://www.twitch.tv/videos/{{ (split " " .CLI_ARGS)._1 }}
+      - ./scripts/import_all_streams.sh
+
+  db:reset:
+    desc: Reset the database
+    cmds:
+      - node ace migration:fresh
+
+  db:seed:
+    desc: Reset the database
+    deps: [db:reset]
+    cmds:
+      - node ace db:seed -f database/seeders/user_seeder.ts
+      - node ace db:seed -f database/seeders/message_seeder.ts
