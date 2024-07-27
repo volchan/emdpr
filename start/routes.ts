@@ -18,8 +18,20 @@ router.get('/', [HomeController, 'index']).use(
   })
 )
 
-router.get('/streams/:id/messages', [MessagesController, 'index']).use(
-  middleware.auth({
-    guards: ['basicAuth'],
+router
+  .group(() => {
+    router.on('/').redirect('/')
+    router.on('/:id').redirect('/streams/:id/messages')
+    router.get('/:id/messages', [MessagesController, 'index']).use(
+      middleware.auth({
+        guards: ['basicAuth'],
+      })
+    )
   })
-)
+  .prefix('streams')
+
+router.get('*', ({ inertia }) => inertia.render('errors/not_found'))
+router.post('*', ({ inertia }) => inertia.render('errors/not_found'))
+router.put('*', ({ inertia }) => inertia.render('errors/not_found'))
+router.patch('*', ({ inertia }) => inertia.render('errors/not_found'))
+router.delete('*', ({ inertia }) => inertia.render('errors/not_found'))
