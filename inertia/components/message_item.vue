@@ -29,7 +29,6 @@ const Time = styled.div`
 `
 
 const Badges = styled.span`
-  display: inline-block;
   img {
     vertical-align: middle;
     margin: 0 .3rem .2rem 0;
@@ -52,6 +51,20 @@ const Author = styled('div', AuthorProps)`
 
 const Text = styled.p`
   margin-top: 0;
+  white-space: -moz-pre-wrap !important;
+  white-space: -webkit-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  white-space: normal;
+
+  max-width: 970px;
+
+  @media (max-width: 500px) {
+    max-width: 300px;
+  }
+
   img {
     vertical-align: middle;
   }
