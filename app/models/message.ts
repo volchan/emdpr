@@ -48,7 +48,7 @@ export type MessageData = {
 
 export default class Message extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
   declare timestamp: number

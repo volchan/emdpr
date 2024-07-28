@@ -15,7 +15,31 @@ tasks:
 
   db:seed:
     desc: Reset the database
-    deps: [db:reset]
     cmds:
       - node ace db:seed -f database/seeders/user_seeder.ts
       - node ace db:seed -f database/seeders/message_seeder.ts
+
+  docker:up:
+    desc: Start the docker containers
+    cmds:
+      - docker compose -f .docker/docker-compose.yml up -d
+
+  docker:deploy:
+    desc: Deploy the docker containers
+    cmds:
+      - docker compose -f .docker/docker-compose.yml up -d --build
+
+  docker:down:
+    desc: Stop the docker containers
+    cmds:
+      - docker compose -f .docker/docker-compose.yml down
+
+  docker:remove:
+    desc: Remove the docker containers
+    cmds:
+      - docker compose -f .docker/docker-compose.yml down -v --rmi all
+
+  docker:run:
+    desc: Run the docker containers
+    cmds:
+      - docker compose -f .docker/docker-compose.yml run --rm -- {{.CLI_ARGS}}

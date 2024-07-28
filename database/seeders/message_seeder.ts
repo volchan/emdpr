@@ -30,12 +30,17 @@ export default class extends BaseSeeder {
       const matchRegexp = new RegExp('(?:^@.* \\|\\| .*)|(?:^\\|\\| .*)', 'g')
       for (const jsonData of parsedData) {
         if (matchRegexp.test(jsonData.message)) {
-          await Message.create({
-            timestamp: jsonData.timestamp,
-            data: jsonData,
-            twitchId: jsonData.message_id,
-            streamId: stream.id,
-          })
+          await Message.firstOrCreate(
+            {
+              twitchId: jsonData.message_id,
+            },
+            {
+              timestamp: jsonData.timestamp,
+              data: jsonData,
+              twitchId: jsonData.message_id,
+              streamId: stream.id,
+            }
+          )
         }
       }
     }

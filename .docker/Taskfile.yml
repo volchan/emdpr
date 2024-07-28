@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  db:reset:
+    desc: Reset the database
+    cmds:
+      - node ace migration:fresh
+
+  db:seed:
+    desc: Reset the database
+    cmds:
+      - node ace db:seed -f database/seeders/user_seeder.ts
+      - node ace db:seed -f database/seeders/message_seeder.ts
+
+  db:migrate:
+    desc: Migrate the database
+    cmds:
+      - node ace migration:run --force
