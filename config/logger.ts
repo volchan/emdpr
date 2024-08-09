@@ -20,6 +20,10 @@ const loggerConfig = defineConfig({
           .pushIf(app.inProduction, targets.file({ destination: 1 }))
           .toArray(),
       },
+      redact: {
+        fields: ['password', 'password_confirmation'],
+        paths: ['req.headers.authorization'],
+      },
     },
   },
 })

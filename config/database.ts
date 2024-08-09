@@ -17,8 +17,10 @@ const dbConfig = defineConfig({
         naturalSort: true,
         paths: ['database/migrations'],
       },
+      debug: true,
     },
   },
+  prettyPrintDebugQueries: true,
 })
 
 export default dbConfig
